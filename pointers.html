@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pointers &amp; References — C++ Learning Guide</title>
+<meta name="description" content="C++ pointers and references: addresses, dereferencing, pointer arithmetic, nullptr, and when to use references instead.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="titlebar">
+  <div class="wrap">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <a class="brand" href="index.html"><span class="path">cpp-guide/</span><span class="file">pointers.html</span></a>
+    <button class="navtoggle" aria-label="toggle menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">home</a>
+      <a href="data-types.html">data-types</a>
+      <a href="operators.html">operators</a>
+      <a href="control-flow.html">control-flow</a>
+      <a href="loops.html">loops</a>
+      <a href="functions.html">functions</a>
+      <a href="arrays-strings.html">arrays-strings</a>
+      <a href="pointers.html">pointers</a>
+      <a href="quiz.html">quiz</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <div class="eyebrow">chapter 07 / 07 — final chapter</div>
+    <h1>Pointers &amp; <span class="accent">References</span></h1>
+    <p class="lede">A pointer stores a memory address instead of a value. This is where C++ gives you real control — and real ways to shoot yourself in the foot, if you're not careful.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <section>
+      <h2>the address-of operator: &amp;</h2>
+      <p class="deck">Every variable lives somewhere in memory. <code>&amp;</code> gives you that address.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">address-of.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> age = <span class="tk-num">25</span>;
+std::cout &lt;&lt; <span class="tk-str">"value: "</span>   &lt;&lt; age  &lt;&lt; std::endl;
+std::cout &lt;&lt; <span class="tk-str">"address: "</span> &lt;&lt; &amp;age &lt;&lt; std::endl;</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>value: 25
+address: 0x7ffeeb1a2c3c</code></pre></div>
+      </div>
+      <p>That address will look different every time you run the program — memory locations aren't fixed.</p>
+    </section>
+
+    <section>
+      <h2>declaring &amp; using a pointer</h2>
+      <p class="deck">A pointer's type must match what it points to. <code>*</code> in a declaration marks a variable as a pointer; <code>*</code> in an expression <em>dereferences</em> it — follows the address to get the value stored there.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">pointer-basic.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> age = <span class="tk-num">25</span>;
+<span class="tk-type">int</span>* agePtr = &amp;age;    <span class="tk-com">// agePtr holds the address of age</span>
+
+std::cout &lt;&lt; <span class="tk-str">"pointer holds address: "</span> &lt;&lt; agePtr  &lt;&lt; std::endl;
+std::cout &lt;&lt; <span class="tk-str">"value at that address: "</span> &lt;&lt; *agePtr &lt;&lt; std::endl;
+
+*agePtr = <span class="tk-num">30</span>;  <span class="tk-com">// changes age itself, through the pointer</span>
+std::cout &lt;&lt; <span class="tk-str">"age is now: "</span> &lt;&lt; age &lt;&lt; std::endl;</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>pointer holds address: 0x7ffeeb1a2c3c
+value at that address: 25
+age is now: 30</code></pre></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>nullptr</h2>
+      <p class="deck">A pointer that isn't pointing at anything yet should be set to <code>nullptr</code>, not left uninitialized. Always check before dereferencing.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">nullptr.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span>* ptr = <span class="tk-kw">nullptr</span>;
+
+<span class="tk-kw">if</span> (ptr != <span class="tk-kw">nullptr</span>) {
+    std::cout &lt;&lt; *ptr &lt;&lt; std::endl;
+} <span class="tk-kw">else</span> {
+    std::cout &lt;&lt; <span class="tk-str">"ptr isn't pointing at anything yet."</span> &lt;&lt; std::endl;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>ptr isn't pointing at anything yet.</code></pre></div>
+      </div>
+      <div class="note note-pitfall">
+        <div class="note-head">common pitfall</div>
+        Dereferencing a <code>nullptr</code> (or any invalid pointer) crashes your program at best, and silently corrupts memory at worst. This is the single most common source of C++ crashes for newcomers.
+      </div>
+    </section>
+
+    <section>
+      <h2>pointers and arrays</h2>
+      <p class="deck">An array's name decays into a pointer to its first element — which is why pointer arithmetic can walk through an array.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">pointer-array.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> nums[<span class="tk-num">3</span>] = {<span class="tk-num">10</span>, <span class="tk-num">20</span>, <span class="tk-num">30</span>};
+<span class="tk-type">int</span>* p = nums;    <span class="tk-com">// points at nums[0]</span>
+
+std::cout &lt;&lt; *p &lt;&lt; std::endl;       <span class="tk-com">// 10</span>
+std::cout &lt;&lt; *(p + 1) &lt;&lt; std::endl; <span class="tk-com">// 20 — moves forward one int</span>
+std::cout &lt;&lt; *(p + 2) &lt;&lt; std::endl; <span class="tk-com">// 30</span></code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>references — a safer alternative</h2>
+      <p class="deck">A reference (<code>&amp;</code> in a declaration) is an alias for an existing variable. Unlike a pointer, it can't be <code>nullptr</code> and can't be reassigned to refer to something else — which removes two whole categories of bugs.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">references.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> score = <span class="tk-num">100</span>;
+<span class="tk-type">int</span>&amp; scoreRef = score;   <span class="tk-com">// scoreRef IS score, just another name for it</span>
+
+scoreRef += <span class="tk-num">50</span>;
+std::cout &lt;&lt; score &lt;&lt; std::endl;  <span class="tk-com">// 150 — changing the reference changes the original</span></code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>150</code></pre></div>
+      </div>
+      <div class="note note-tip">
+        <div class="note-head">tip</div>
+        In modern C++, prefer references for function parameters (see the Functions chapter) and reach for raw pointers mainly for optional values or low-level work. For owning dynamic memory, prefer smart pointers (<code>std::unique_ptr</code>, <code>std::shared_ptr</code>) over raw <code>new</code>/<code>delete</code> — a great next topic once you're comfortable here.
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="ex-head">try it yourself</div>
+      <p>Write a function <code>void swap(int&amp; a, int&amp; b)</code> that swaps the values of two integers using references, and prove it works by calling it on two variables and printing them before and after.</p>
+    </section>
+
+    <div class="note note-tip" style="margin-top:36px;">
+      <div class="note-head">you made it</div>
+      That's the core of C++. Head to the <a href="quiz.html">quiz</a> to check what stuck, chapter by chapter.
+    </div>
+
+  </div>
+
+  <div class="wrap">
+    <div class="pager">
+      <a href="arrays-strings.html"><span class="dir">← back</span>Arrays &amp; Strings</a>
+      <a class="next" href="quiz.html"><span class="dir">next →</span>Take the Quiz</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>cpp-guide/ — built by Layan Noriel D.</span>
+    <span><a href="leaderboard.php">leaderboard</a> · <a href="contact.html">contact</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>

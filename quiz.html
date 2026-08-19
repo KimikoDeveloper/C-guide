@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — C++ Learning Guide</title>
+<meta name="description" content="Test what you've learned across all seven C++ Learning Guide chapters.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="titlebar">
+  <div class="wrap">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <a class="brand" href="index.html"><span class="path">cpp-guide/</span><span class="file">quiz.html</span></a>
+    <button class="navtoggle" aria-label="toggle menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">home</a>
+      <a href="data-types.html">data-types</a>
+      <a href="operators.html">operators</a>
+      <a href="control-flow.html">control-flow</a>
+      <a href="loops.html">loops</a>
+      <a href="functions.html">functions</a>
+      <a href="arrays-strings.html">arrays-strings</a>
+      <a href="pointers.html">pointers</a>
+      <a href="quiz.html">quiz</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <div class="eyebrow">checkpoint</div>
+    <h1>Quick <span class="accent">Quiz</span></h1>
+    <p class="lede">Eight questions across every chapter. Graded instantly in your browser — your score is also saved to this site's leaderboard.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap" style="max-width:760px;">
+
+    <div class="field" style="max-width:320px;">
+      <label for="quizName">your name (for the leaderboard)</label>
+      <input type="text" id="quizName" placeholder="e.g. Ada" maxlength="24">
+    </div>
+
+    <div data-quiz="full-quiz">
+
+      <div class="quiz-q" data-correct="c">
+        <p class="qtext">1. What does <code>7 / 2</code> evaluate to in C++, if both operands are <code>int</code>?</p>
+        <div class="quiz-opts">
+          <label class="quiz-opt"><input type="radio" name="q1" value="a"> 3.5</label>
+          <label class="quiz-opt"><input type="radio" name="q1" value="b"> 4</label>
+          <label class="quiz-opt"><input type="radio" name="q1" value="c"> 3</label>
+          <label class="quiz-opt"><input type="radio" name="q1" value="d"> a compile error</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="b">
+        <p class="qtext">2. Which operator checks equality (not assignment)?</p>
+        <div class="quiz-opts">
+          <label class="quiz-opt"><input type="radio" name="q2" value="a"> =</label>
+          <label class="quiz-opt"><input type="radio" name="q2" value="b"> ==</label>
+          <label class="quiz-opt"><input type="radio" name="q2" value="c"> :=</label>
+          <label class="quiz-opt"><input type="radio" name="q2" value="d"> =&gt;</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="a">
+        <p class="qtext">3. In a <code>switch</code> statement, what happens if you forget <code>break;</code>?</p>
+        <div class="quiz-opts">
+          <label class="quiz-opt"><input type="radio" name="q3" value="a"> Execution falls through into the next case</label>
+          <label class="quiz-opt"><input type="radio" name="q3" value="b"> The program refuses to compile</label>
+          <label class="quiz-opt"><input type="radio" name="q3" value="c"> The switch exits immediately, as if break were implied</label>
+          <label class="quiz-opt"><input type="radio" name="q3" value="d"> Only the default case runs</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="d">
+        <p class="qtext">4. Which loop guarantees its body runs at least once?</p>
+        <div class="quiz-opts">
+          <label class="quiz-opt"><input type="radio" name="q4" value="a"> for</label>
+          <label class="quiz-opt"><input type="radio" name="q4" value="b"> while</label>
+          <label class="quiz-opt"><input type="radio" name="q4" value="c"> range-based for</label>
+          <label class="quiz-opt"><input type="radio" name="q4" value="d"> do-while</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="c">
+        <p class="qtext">5. What keyword skips the rest of the current loop iteration and moves to the next one?</p>
+        <div class="quiz-opts">
+          <label class="quiz-opt"><input type="radio" name="q5" value="a"> break</label>
+          <label class="quiz-opt"><input type="radio" name="q5" value="b"> skip</label>
+          <label class="quiz-opt"><input type="radio" name="q5" value="c"> continue</label>
+          <label class="quiz-opt"><input type="radio" name="q5" value="d"> next</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="b">
+        <p class="qtext">6. To let a function modify the caller's original variable, you should pass it by:</p>
+        <div class="quiz-opts">
+          <label class="quiz-opt"><input type="radio" name="q6" value="a"> value</label>
+          <label class="quiz-opt"><input type="radio" name="q6" value="b"> reference (&amp;)</label>
+          <label class="quiz-opt"><input type="radio" name="q6" value="c"> copy</label>
+          <label class="quiz-opt"><input type="radio" name="q6" value="d"> it isn't possible in C++</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="a">
+        <p class="qtext">7. <code>std::vector</code> differs from a fixed-size C-style array mainly because it:</p>
+        <div class="quiz-opts">
+          <label class="quiz-opt"><input type="radio" name="q7" value="a"> Can grow and shrink at runtime</label>
+          <label class="quiz-opt"><input type="radio" name="q7" value="b"> Can only hold strings</label>
+          <label class="quiz-opt"><input type="radio" name="q7" value="c"> Doesn't support indexing</label>
+          <label class="quiz-opt"><input type="radio" name="q7" value="d"> Is always faster in every case</label>
+        </div>
+      </div>
+
+      <div class="quiz-q" data-correct="d">
+        <p class="qtext">8. What does the <code>*</code> symbol mean when placed before a pointer variable in an expression (e.g. <code>*agePtr</code>)?</p>
+        <div class="quiz-opts">
+          <label class="quiz-opt"><input type="radio" name="q8" value="a"> Multiply the pointer by itself</label>
+          <label class="quiz-opt"><input type="radio" name="q8" value="b"> Declare a new pointer</label>
+          <label class="quiz-opt"><input type="radio" name="q8" value="c"> Get the memory address</label>
+          <label class="quiz-opt"><input type="radio" name="q8" value="d"> Dereference — get the value stored at that address</label>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" data-quiz-submit type="button">check answers</button>
+      <div class="quiz-score" data-quiz-score style="display:none;"></div>
+    </div>
+
+    <p style="margin-top:30px; color:var(--muted); font-size:14px;">
+      Scores post to <code>save-score.php</code>. See the results on the <a href="leaderboard.php">PHP leaderboard</a> —
+      note the leaderboard only works when this site is served through a PHP-enabled server (e.g. <code>php -S localhost:8000</code>),
+      not when opened as a plain local file.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>cpp-guide/ — built by Layan Noriel D.</span>
+    <span><a href="leaderboard.php">leaderboard</a> · <a href="contact.html">contact</a></span>
+  </div>
+</footer>
+
+<script>
+  // remember the name typed here so script.js can attach it to the score post
+  document.addEventListener('DOMContentLoaded', () => {
+    const nameInput = document.getElementById('quizName');
+    const saved = localStorage.getItem('cpp_guide_name');
+    if(saved) nameInput.value = saved;
+    nameInput.addEventListener('input', () => {
+      localStorage.setItem('cpp_guide_name', nameInput.value.trim() || 'anonymous');
+    });
+  });
+</script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>

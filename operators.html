@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operators — C++ Learning Guide</title>
+<meta name="description" content="C++ operators: arithmetic, assignment, comparison, logical, and increment/decrement, with precedence notes.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="titlebar">
+  <div class="wrap">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <a class="brand" href="index.html"><span class="path">cpp-guide/</span><span class="file">operators.html</span></a>
+    <button class="navtoggle" aria-label="toggle menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">home</a>
+      <a href="data-types.html">data-types</a>
+      <a href="operators.html">operators</a>
+      <a href="control-flow.html">control-flow</a>
+      <a href="loops.html">loops</a>
+      <a href="functions.html">functions</a>
+      <a href="arrays-strings.html">arrays-strings</a>
+      <a href="pointers.html">pointers</a>
+      <a href="quiz.html">quiz</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <div class="eyebrow">chapter 02 / 07</div>
+    <h1><span class="accent">Operators</span></h1>
+    <p class="lede">Operators combine values into new values. C++ groups them into a few families — arithmetic, assignment, comparison, logical, and increment/decrement.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <section>
+      <h2>arithmetic operators</h2>
+      <table>
+        <thead><tr><th>operator</th><th>meaning</th><th>example</th><th>result</th></tr></thead>
+        <tbody>
+          <tr><td><code>+</code></td><td>addition</td><td><code>5 + 2</code></td><td><code>7</code></td></tr>
+          <tr><td><code>-</code></td><td>subtraction</td><td><code>5 - 2</code></td><td><code>3</code></td></tr>
+          <tr><td><code>*</code></td><td>multiplication</td><td><code>5 * 2</code></td><td><code>10</code></td></tr>
+          <tr><td><code>/</code></td><td>division</td><td><code>5 / 2</code></td><td><code>2</code> (int division truncates)</td></tr>
+          <tr><td><code>%</code></td><td>modulo (remainder)</td><td><code>5 % 2</code></td><td><code>1</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">arithmetic.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> a = <span class="tk-num">17</span>, b = <span class="tk-num">5</span>;
+
+std::cout &lt;&lt; <span class="tk-str">"sum: "</span>  &lt;&lt; (a + b) &lt;&lt; std::endl;  <span class="tk-com">// 22</span>
+std::cout &lt;&lt; <span class="tk-str">"quot: "</span> &lt;&lt; (a / b) &lt;&lt; std::endl;  <span class="tk-com">// 3</span>
+std::cout &lt;&lt; <span class="tk-str">"rem: "</span>  &lt;&lt; (a % b) &lt;&lt; std::endl;  <span class="tk-com">// 2</span></code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>sum: 22
+quot: 3
+rem: 2</code></pre></div>
+      </div>
+
+      <div class="note note-tip">
+        <div class="note-head">tip</div>
+        <code>%</code> only works on integer types. It's the standard way to check things like "is this number even" (<code>n % 2 == 0</code>) or to wrap a value into a range.
+      </div>
+    </section>
+
+    <section>
+      <h2>assignment operators</h2>
+      <p class="deck">Shorthand for "do the operation, then assign the result back to the same variable."</p>
+      <table>
+        <thead><tr><th>operator</th><th>equivalent to</th></tr></thead>
+        <tbody>
+          <tr><td><code>x += 5</code></td><td><code>x = x + 5</code></td></tr>
+          <tr><td><code>x -= 5</code></td><td><code>x = x - 5</code></td></tr>
+          <tr><td><code>x *= 5</code></td><td><code>x = x * 5</code></td></tr>
+          <tr><td><code>x /= 5</code></td><td><code>x = x / 5</code></td></tr>
+          <tr><td><code>x %= 5</code></td><td><code>x = x % 5</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>comparison operators</h2>
+      <p class="deck">These always produce a <code>bool</code> — <code>true</code> or <code>false</code>.</p>
+      <table>
+        <thead><tr><th>operator</th><th>meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>==</code></td><td>equal to</td></tr>
+          <tr><td><code>!=</code></td><td>not equal to</td></tr>
+          <tr><td><code>&gt;</code> / <code>&lt;</code></td><td>greater / less than</td></tr>
+          <tr><td><code>&gt;=</code> / <code>&lt;=</code></td><td>greater-or-equal / less-or-equal</td></tr>
+        </tbody>
+      </table>
+      <div class="note note-pitfall">
+        <div class="note-head">common pitfall</div>
+        <code>=</code> assigns; <code>==</code> compares. Writing <code>if (x = 5)</code> instead of <code>if (x == 5)</code> compiles, silently sets <code>x</code> to 5, and is always true — a classic beginner bug.
+      </div>
+    </section>
+
+    <section>
+      <h2>logical operators</h2>
+      <table>
+        <thead><tr><th>operator</th><th>meaning</th><th>example</th></tr></thead>
+        <tbody>
+          <tr><td><code>&amp;&amp;</code></td><td>AND — both sides must be true</td><td><code>age &gt;= 18 &amp;&amp; hasId</code></td></tr>
+          <tr><td><code>||</code></td><td>OR — at least one side true</td><td><code>isAdmin || isOwner</code></td></tr>
+          <tr><td><code>!</code></td><td>NOT — flips a bool</td><td><code>!isLocked</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">logical.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> age = <span class="tk-num">20</span>;
+<span class="tk-type">bool</span> hasTicket = <span class="tk-kw">true</span>;
+
+<span class="tk-kw">if</span> (age &gt;= <span class="tk-num">18</span> &amp;&amp; hasTicket) {
+    std::cout &lt;&lt; <span class="tk-str">"Entry allowed"</span> &lt;&lt; std::endl;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>Entry allowed</code></pre></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>increment &amp; decrement</h2>
+      <p class="deck"><code>++</code> and <code>--</code> add or subtract 1. Placement changes when the value updates.</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>prefix: ++x</h4>
+          <p>Increments <em>first</em>, then returns the new value. <code>int y = ++x;</code> — both <code>x</code> and <code>y</code> get the incremented value.</p>
+        </div>
+        <div class="card">
+          <h4>postfix: x++</h4>
+          <p>Returns the <em>current</em> value first, then increments. <code>int y = x++;</code> — <code>y</code> gets the old value, <code>x</code> is incremented after.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>operator precedence</h2>
+      <p class="deck">Like math class: multiplication/division before addition/subtraction. When unsure, use parentheses — they cost nothing and remove all ambiguity.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">precedence.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> result = <span class="tk-num">2</span> + <span class="tk-num">3</span> * <span class="tk-num">4</span>;      <span class="tk-com">// 14, not 20 — * runs first</span>
+<span class="tk-type">int</span> clearer = <span class="tk-num">2</span> + (<span class="tk-num">3</span> * <span class="tk-num">4</span>);  <span class="tk-com">// same result, easier to read</span></code></pre>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="ex-head">try it yourself</div>
+      <p>Write an expression that checks whether a year is a leap year: divisible by 4, but not by 100 <em>unless</em> it's also divisible by 400. You'll need <code>%</code>, <code>&amp;&amp;</code>, <code>||</code>, and parentheses.</p>
+    </section>
+
+  </div>
+
+  <div class="wrap">
+    <div class="pager">
+      <a href="data-types.html"><span class="dir">← back</span>Data Types</a>
+      <a class="next" href="control-flow.html"><span class="dir">next →</span>If / Else &amp; Switch</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>cpp-guide/ — built by Layan Noriel D.</span>
+    <span><a href="leaderboard.php">leaderboard</a> · <a href="contact.html">contact</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>

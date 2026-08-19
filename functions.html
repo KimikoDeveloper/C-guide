@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Functions — C++ Learning Guide</title>
+<meta name="description" content="C++ functions: declaring, calling, parameters, return values, overloading, default arguments, and pass-by-reference.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="titlebar">
+  <div class="wrap">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <a class="brand" href="index.html"><span class="path">cpp-guide/</span><span class="file">functions.html</span></a>
+    <button class="navtoggle" aria-label="toggle menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">home</a>
+      <a href="data-types.html">data-types</a>
+      <a href="operators.html">operators</a>
+      <a href="control-flow.html">control-flow</a>
+      <a href="loops.html">loops</a>
+      <a href="functions.html">functions</a>
+      <a href="arrays-strings.html">arrays-strings</a>
+      <a href="pointers.html">pointers</a>
+      <a href="quiz.html">quiz</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <div class="eyebrow">chapter 05 / 07</div>
+    <h1><span class="accent">Functions</span></h1>
+    <p class="lede">Functions package up code you want to reuse. Give them a name, some inputs, and (optionally) a value to hand back.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <section>
+      <h2>declaring &amp; calling a function</h2>
+      <p class="deck">A function has a return type, a name, parameters in parentheses, and a body in braces.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">functions-basic.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> <span class="tk-fn">add</span>(<span class="tk-type">int</span> a, <span class="tk-type">int</span> b) {
+    <span class="tk-kw">return</span> a + b;
+}
+
+<span class="tk-type">int</span> <span class="tk-fn">main</span>() {
+    <span class="tk-type">int</span> result = <span class="tk-fn">add</span>(<span class="tk-num">4</span>, <span class="tk-num">9</span>);
+    std::cout &lt;&lt; <span class="tk-str">"4 + 9 = "</span> &lt;&lt; result &lt;&lt; std::endl;
+    <span class="tk-kw">return</span> <span class="tk-num">0</span>;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>4 + 9 = 13</code></pre></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>void functions</h2>
+      <p class="deck">Use <code>void</code> when a function does something but doesn't need to hand back a value.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">void-fn.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">void</span> <span class="tk-fn">greet</span>(std::string name) {
+    std::cout &lt;&lt; <span class="tk-str">"Hello, "</span> &lt;&lt; name &lt;&lt; <span class="tk-str">"!"</span> &lt;&lt; std::endl;
+}</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>default arguments</h2>
+      <p class="deck">Give a parameter a fallback value — callers can omit it entirely.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">defaults.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">double</span> <span class="tk-fn">power</span>(<span class="tk-type">double</span> base, <span class="tk-type">int</span> exponent = <span class="tk-num">2</span>) {
+    <span class="tk-type">double</span> result = <span class="tk-num">1</span>;
+    <span class="tk-kw">for</span> (<span class="tk-type">int</span> i = <span class="tk-num">0</span>; i &lt; exponent; i++) result *= base;
+    <span class="tk-kw">return</span> result;
+}
+
+<span class="tk-fn">power</span>(<span class="tk-num">5</span>);     <span class="tk-com">// 25   (exponent defaults to 2)</span>
+<span class="tk-fn">power</span>(<span class="tk-num">2</span>, <span class="tk-num">10</span>); <span class="tk-com">// 1024 (explicit exponent)</span></code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>function overloading</h2>
+      <p class="deck">Multiple functions can share a name if their parameter lists differ — the compiler picks the right one based on the arguments you pass.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">overload.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> <span class="tk-fn">multiply</span>(<span class="tk-type">int</span> a, <span class="tk-type">int</span> b) { <span class="tk-kw">return</span> a * b; }
+<span class="tk-type">double</span> <span class="tk-fn">multiply</span>(<span class="tk-type">double</span> a, <span class="tk-type">double</span> b) { <span class="tk-kw">return</span> a * b; }
+
+<span class="tk-fn">multiply</span>(<span class="tk-num">3</span>, <span class="tk-num">4</span>);      <span class="tk-com">// calls the int version → 12</span>
+<span class="tk-fn">multiply</span>(<span class="tk-num">2.5</span>, <span class="tk-num">2.0</span>);  <span class="tk-com">// calls the double version → 5.0</span></code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>pass-by-value vs. pass-by-reference</h2>
+      <p class="deck">By default, arguments are <strong>copied</strong> into the function. Add <code>&amp;</code> to the parameter type to let the function modify the caller's original variable.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">by-reference.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">void</span> <span class="tk-fn">doubleIt</span>(<span class="tk-type">int</span> x) {        <span class="tk-com">// by value — copy only</span>
+    x *= <span class="tk-num">2</span>;
+}
+<span class="tk-type">void</span> <span class="tk-fn">doubleItRef</span>(<span class="tk-type">int</span> &amp;x) {    <span class="tk-com">// by reference — modifies original</span>
+    x *= <span class="tk-num">2</span>;
+}
+
+<span class="tk-type">int</span> n = <span class="tk-num">5</span>;
+<span class="tk-fn">doubleIt</span>(n);
+std::cout &lt;&lt; n &lt;&lt; std::endl;    <span class="tk-com">// 5 — unchanged</span>
+
+<span class="tk-fn">doubleItRef</span>(n);
+std::cout &lt;&lt; n &lt;&lt; std::endl;    <span class="tk-com">// 10 — changed!</span></code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>5
+10</code></pre></div>
+      </div>
+      <div class="note note-tip">
+        <div class="note-head">tip</div>
+        Pass large objects (like a big <code>std::string</code> or <code>std::vector</code>) as <code>const &amp;</code> when you don't need to modify them — you get the speed of a reference without the risk of the function changing your data.
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="ex-head">try it yourself</div>
+      <p>Write a function <code>bool isPrime(int n)</code> that returns whether <code>n</code> is a prime number, then call it in a loop to print every prime between 2 and 30.</p>
+    </section>
+
+  </div>
+
+  <div class="wrap">
+    <div class="pager">
+      <a href="loops.html"><span class="dir">← back</span>Loops</a>
+      <a class="next" href="arrays-strings.html"><span class="dir">next →</span>Arrays &amp; Strings</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>cpp-guide/ — built by Layan Noriel D.</span>
+    <span><a href="leaderboard.php">leaderboard</a> · <a href="contact.html">contact</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>

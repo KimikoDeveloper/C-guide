@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loops — C++ Learning Guide</title>
+<meta name="description" content="C++ loops: for, while, do-while, nested loops, and break/continue.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="titlebar">
+  <div class="wrap">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <a class="brand" href="index.html"><span class="path">cpp-guide/</span><span class="file">loops.html</span></a>
+    <button class="navtoggle" aria-label="toggle menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">home</a>
+      <a href="data-types.html">data-types</a>
+      <a href="operators.html">operators</a>
+      <a href="control-flow.html">control-flow</a>
+      <a href="loops.html">loops</a>
+      <a href="functions.html">functions</a>
+      <a href="arrays-strings.html">arrays-strings</a>
+      <a href="pointers.html">pointers</a>
+      <a href="quiz.html">quiz</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <div class="eyebrow">chapter 04 / 07</div>
+    <h1><span class="accent">Loops</span></h1>
+    <p class="lede">Loops repeat a block of code — so you don't have to write the same lines over and over.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <section>
+      <h2>the for loop</h2>
+      <p class="deck">Best when you know how many times you want to repeat. Three parts, separated by semicolons: initialize, condition, update.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">for-loop.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-kw">for</span> (<span class="tk-type">int</span> i = <span class="tk-num">1</span>; i &lt;= <span class="tk-num">5</span>; i++) {
+    std::cout &lt;&lt; <span class="tk-str">"Count: "</span> &lt;&lt; i &lt;&lt; std::endl;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>Count: 1
+Count: 2
+Count: 3
+Count: 4
+Count: 5</code></pre></div>
+      </div>
+      <div class="note note-tip">
+        <div class="note-head">tip</div>
+        <code>i</code> is scoped to the loop — it only exists inside those braces. Reading it after the loop ends is a compile error.
+      </div>
+    </section>
+
+    <section>
+      <h2>the while loop</h2>
+      <p class="deck">Best when you don't know the exact number of iterations ahead of time — it keeps going as long as the condition stays true.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">while-loop.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> countdown = <span class="tk-num">3</span>;
+
+<span class="tk-kw">while</span> (countdown &gt; <span class="tk-num">0</span>) {
+    std::cout &lt;&lt; countdown &lt;&lt; <span class="tk-str">"..."</span> &lt;&lt; std::endl;
+    countdown--;
+}
+std::cout &lt;&lt; <span class="tk-str">"Liftoff!"</span> &lt;&lt; std::endl;</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>3...
+2...
+1...
+Liftoff!</code></pre></div>
+      </div>
+      <div class="note note-pitfall">
+        <div class="note-head">common pitfall</div>
+        If nothing inside the loop changes the condition, you get an infinite loop. Always make sure the loop variable actually moves toward the exit condition.
+      </div>
+    </section>
+
+    <section>
+      <h2>the do-while loop</h2>
+      <p class="deck">Like <code>while</code>, but the condition is checked <em>after</em> the block runs — so the body always executes at least once.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">do-while.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> input;
+<span class="tk-kw">do</span> {
+    std::cout &lt;&lt; <span class="tk-str">"Enter a positive number: "</span>;
+    std::cin &gt;&gt; input;
+} <span class="tk-kw">while</span> (input &lt;= <span class="tk-num">0</span>);</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>nested loops</h2>
+      <p class="deck">A loop inside a loop — common for grids, tables, and 2D data.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">nested.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-kw">for</span> (<span class="tk-type">int</span> row = <span class="tk-num">1</span>; row &lt;= <span class="tk-num">3</span>; row++) {
+    <span class="tk-kw">for</span> (<span class="tk-type">int</span> col = <span class="tk-num">1</span>; col &lt;= <span class="tk-num">3</span>; col++) {
+        std::cout &lt;&lt; row * col &lt;&lt; <span class="tk-str">" "</span>;
+    }
+    std::cout &lt;&lt; std::endl;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>1 2 3
+2 4 6
+3 6 9</code></pre></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>break &amp; continue</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>break</h4>
+          <p>Exits the loop immediately, skipping any remaining iterations.</p>
+        </div>
+        <div class="card">
+          <h4>continue</h4>
+          <p>Skips the rest of the <em>current</em> iteration and moves to the next one.</p>
+        </div>
+      </div>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">break-continue.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-kw">for</span> (<span class="tk-type">int</span> i = <span class="tk-num">1</span>; i &lt;= <span class="tk-num">10</span>; i++) {
+    <span class="tk-kw">if</span> (i % <span class="tk-num">2</span> == <span class="tk-num">0</span>) <span class="tk-kw">continue</span>;  <span class="tk-com">// skip even numbers</span>
+    <span class="tk-kw">if</span> (i &gt; <span class="tk-num">7</span>) <span class="tk-kw">break</span>;         <span class="tk-com">// stop once i exceeds 7</span>
+    std::cout &lt;&lt; i &lt;&lt; <span class="tk-str">" "</span>;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>1 3 5 7</code></pre></div>
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="ex-head">try it yourself</div>
+      <p>Print the multiplication table for 7, from <code>7 x 1</code> through <code>7 x 12</code>, using a single <code>for</code> loop.</p>
+    </section>
+
+  </div>
+
+  <div class="wrap">
+    <div class="pager">
+      <a href="control-flow.html"><span class="dir">← back</span>If / Else &amp; Switch</a>
+      <a class="next" href="functions.html"><span class="dir">next →</span>Functions</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>cpp-guide/ — built by Layan Noriel D.</span>
+    <span><a href="leaderboard.php">leaderboard</a> · <a href="contact.html">contact</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — C++ Learning Guide</title>
+<meta name="description" content="Send a question or bit of feedback about the C++ Learning Guide.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="titlebar">
+  <div class="wrap">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <a class="brand" href="index.html"><span class="path">cpp-guide/</span><span class="file">contact.html</span></a>
+    <button class="navtoggle" aria-label="toggle menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">home</a>
+      <a href="data-types.html">data-types</a>
+      <a href="operators.html">operators</a>
+      <a href="control-flow.html">control-flow</a>
+      <a href="loops.html">loops</a>
+      <a href="functions.html">functions</a>
+      <a href="arrays-strings.html">arrays-strings</a>
+      <a href="pointers.html">pointers</a>
+      <a href="quiz.html">quiz</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <div class="eyebrow">get in touch</div>
+    <h1>Found a bug in the <span class="accent">guide?</span></h1>
+    <p class="lede">Send a question, correction, or request for a new chapter. This form posts to <code>contact-handler.php</code>, which validates the fields server-side and stores the message.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap" style="max-width:640px;">
+
+    <div id="statusBox"></div>
+
+    <form action="contact-handler.php" method="POST" id="contactForm">
+      <div class="field">
+        <label for="name">name</label>
+        <input type="text" id="name" name="name" required maxlength="80" placeholder="Noriel Layan">
+      </div>
+      <div class="field">
+        <label for="email">email</label>
+        <input type="email" id="email" name="email" required maxlength="120" placeholder="layan@gmail.com">
+      </div>
+      <div class="field">
+        <label for="topic">topic</label>
+        <select id="topic" name="topic">
+          <option value="bug">bug in a chapter</option>
+          <option value="question">question about C++</option>
+          <option value="request">new chapter request</option>
+          <option value="other">other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">message</label>
+        <textarea id="message" name="message" required maxlength="2000" placeholder="What's on your mind?"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">send message</button>
+    </form>
+
+    <div class="note note-tip" style="margin-top:26px;">
+      <div class="note-head">how this works</div>
+      Submitting posts your fields to <code>contact-handler.php</code>, which runs server-side PHP: it validates the name/email/message, appends the message to <code>data/messages.json</code>, and redirects back here with a status flag (<code>?sent=1</code> or <code>?sent=0</code>). This requires a PHP server — opening this file directly in a browser (<code>file://</code>) won't submit anywhere.
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>cpp-guide/ cpp-guide/ — built by Layan Noriel D. — contact.html</span>
+    <span><a href="leaderboard.php">leaderboard</a> · <a href="index.html">home</a></span>
+  </div>
+</footer>
+
+<script>
+  // contact-handler.php redirects back here with ?sent=1 or ?sent=0&err=...
+  // Read that from the URL and show an inline status message.
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(location.search);
+    const box = document.getElementById('statusBox');
+    if(params.get('sent') === '1'){
+      box.innerHTML = '<div class="form-msg ok">Message sent — thanks! I read every one of these.</div>';
+    } else if(params.get('sent') === '0'){
+      const reason = params.get('err') || 'please check the form and try again.';
+      box.innerHTML = `<div class="form-msg err">Couldn't send that: ${reason}</div>`;
+    }
+  });
+</script>
+<script src="assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrays &amp; Strings — C++ Learning Guide</title>
+<meta name="description" content="C++ arrays and strings: fixed arrays, 2D arrays, std::string, and std::vector basics.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="titlebar">
+  <div class="wrap">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <a class="brand" href="index.html"><span class="path">cpp-guide/</span><span class="file">arrays-strings.html</span></a>
+    <button class="navtoggle" aria-label="toggle menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">home</a>
+      <a href="data-types.html">data-types</a>
+      <a href="operators.html">operators</a>
+      <a href="control-flow.html">control-flow</a>
+      <a href="loops.html">loops</a>
+      <a href="functions.html">functions</a>
+      <a href="arrays-strings.html">arrays-strings</a>
+      <a href="pointers.html">pointers</a>
+      <a href="quiz.html">quiz</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <div class="eyebrow">chapter 06 / 07</div>
+    <h1>Arrays &amp; <span class="accent">Strings</span></h1>
+    <p class="lede">Arrays hold a fixed-size sequence of same-typed values. Strings are, under the hood, sequences of characters with a lot of built-in convenience.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <section>
+      <h2>fixed-size arrays</h2>
+      <p class="deck">Declared with a type, a name, and a size in brackets. Indexing starts at <code>0</code>.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">arrays-basic.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> scores[<span class="tk-num">5</span>] = {<span class="tk-num">90</span>, <span class="tk-num">85</span>, <span class="tk-num">77</span>, <span class="tk-num">92</span>, <span class="tk-num">88</span>};
+
+std::cout &lt;&lt; <span class="tk-str">"First score: "</span> &lt;&lt; scores[<span class="tk-num">0</span>] &lt;&lt; std::endl;
+std::cout &lt;&lt; <span class="tk-str">"Last score: "</span>  &lt;&lt; scores[<span class="tk-num">4</span>] &lt;&lt; std::endl;
+
+<span class="tk-kw">for</span> (<span class="tk-type">int</span> i = <span class="tk-num">0</span>; i &lt; <span class="tk-num">5</span>; i++) {
+    std::cout &lt;&lt; scores[i] &lt;&lt; <span class="tk-str">" "</span>;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>First score: 90
+Last score: 88
+90 85 77 92 88</code></pre></div>
+      </div>
+      <div class="note note-pitfall">
+        <div class="note-head">common pitfall</div>
+        A 5-element array has valid indices <code>0</code> through <code>4</code>. Accessing <code>scores[5]</code> reads memory outside the array — C++ won't stop you, and the result is undefined behavior, not a helpful error.
+      </div>
+    </section>
+
+    <section>
+      <h2>2D arrays</h2>
+      <p class="deck">An array of arrays — useful for grids, boards, and tables.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">2d-array.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> grid[<span class="tk-num">2</span>][<span class="tk-num">3</span>] = {
+    {<span class="tk-num">1</span>, <span class="tk-num">2</span>, <span class="tk-num">3</span>},
+    {<span class="tk-num">4</span>, <span class="tk-num">5</span>, <span class="tk-num">6</span>}
+};
+
+std::cout &lt;&lt; grid[<span class="tk-num">1</span>][<span class="tk-num">2</span>] &lt;&lt; std::endl; <span class="tk-com">// 6 — row 1, column 2</span></code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>std::string</h2>
+      <p class="deck">Include <code>&lt;string&gt;</code> and you get concatenation, length, substrings, and comparisons for free — far friendlier than raw C-style char arrays.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">strings.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-op">#include</span> <span class="tk-str">&lt;string&gt;</span>
+
+std::string first = <span class="tk-str">"Ada"</span>;
+std::string last  = <span class="tk-str">"Lovelace"</span>;
+std::string full  = first + <span class="tk-str">" "</span> + last;   <span class="tk-com">// concatenation with +</span>
+
+std::cout &lt;&lt; full &lt;&lt; std::endl;
+std::cout &lt;&lt; <span class="tk-str">"length: "</span> &lt;&lt; full.<span class="tk-fn">length</span>() &lt;&lt; std::endl;
+std::cout &lt;&lt; <span class="tk-str">"first 3 chars: "</span> &lt;&lt; full.<span class="tk-fn">substr</span>(<span class="tk-num">0</span>, <span class="tk-num">3</span>) &lt;&lt; std::endl;</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>Ada Lovelace
+length: 12
+first 3 chars: Ada</code></pre></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>std::vector — a resizable array</h2>
+      <p class="deck">Regular arrays have a fixed size decided at compile time. <code>std::vector</code> (from <code>&lt;vector&gt;</code>) can grow and shrink at runtime.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">vector.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-op">#include</span> <span class="tk-str">&lt;vector&gt;</span>
+
+std::vector&lt;<span class="tk-type">int</span>&gt; nums = {<span class="tk-num">10</span>, <span class="tk-num">20</span>, <span class="tk-num">30</span>};
+nums.<span class="tk-fn">push_back</span>(<span class="tk-num">40</span>);    <span class="tk-com">// add to the end</span>
+
+<span class="tk-kw">for</span> (<span class="tk-type">int</span> n : nums) {       <span class="tk-com">// range-based for loop</span>
+    std::cout &lt;&lt; n &lt;&lt; <span class="tk-str">" "</span>;
+}
+std::cout &lt;&lt; <span class="tk-str">"\nsize: "</span> &lt;&lt; nums.<span class="tk-fn">size</span>() &lt;&lt; std::endl;</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>10 20 30 40 
+size: 4</code></pre></div>
+      </div>
+      <div class="note note-tip">
+        <div class="note-head">tip</div>
+        The <code>for (int n : nums)</code> syntax is a <strong>range-based for loop</strong> — it reads "for each <code>n</code> in <code>nums</code>," and avoids manual index bookkeeping entirely.
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="ex-head">try it yourself</div>
+      <p>Given <code>std::vector&lt;int&gt; nums = {4, 8, 15, 16, 23, 42};</code>, write a loop that computes and prints the sum and the average of all elements.</p>
+    </section>
+
+  </div>
+
+  <div class="wrap">
+    <div class="pager">
+      <a href="functions.html"><span class="dir">← back</span>Functions</a>
+      <a class="next" href="pointers.html"><span class="dir">next →</span>Pointers &amp; References</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>cpp-guide/ — built by Layan Noriel D.</span>
+    <span><a href="leaderboard.php">leaderboard</a> · <a href="contact.html">contact</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Learning Guide — Created by Noriel</title>
+<meta name="description" content="A free, from-scratch C++ course: data types, operators, control flow, loops, functions, arrays, strings, and pointers — with runnable examples and quizzes.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="titlebar">
+  <div class="wrap">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <a class="brand" href="index.html"><span class="path">cpp-guide/</span><span class="file">index.html</span></a>
+    <button class="navtoggle" aria-label="toggle menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">home</a>
+      <a href="data-types.html">data-types</a>
+      <a href="operators.html">operators</a>
+      <a href="control-flow.html">control-flow</a>
+      <a href="loops.html">loops</a>
+      <a href="functions.html">functions</a>
+      <a href="arrays-strings.html">arrays-strings</a>
+      <a href="pointers.html">pointers</a>
+      <a href="quiz.html">quiz</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">~/cpp-guide <span class="cursor"></span></div>
+    <h1>Learn C++ from Noriel?<br>Let's <span class="accent">START</span> this.</h1>
+    <p class="lede">
+      First you learn  data types, operators,
+      branching, loops, functions, arrays, strings, and pointers. Every concept
+      ships with a runnable example and its real output — not just theory.
+    </p>
+    <div class="btnrow">
+      <a class="btn btn-primary" href="data-types.html">start with data types →</a>
+      <a class="btn btn-ghost" href="quiz.html">jump to the quiz</a>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <section aria-labelledby="path-heading">
+      <h2 id="path-heading">the learning path <span class="tag">// 7 chapters</span></h2>
+      <p class="deck">Go in order — each chapter builds on the last — or jump straight to what you need.</p>
+
+      <div class="chapters">
+        <a class="chapter" href="data-types.html">
+          <span class="idx">01</span>
+          <span class="meta"><h3>Data Types</h3><p>int, double, char, bool, string, and the sizes/ranges that matter.</p></span>
+          <span class="lvl">beginner</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="chapter" href="operators.html">
+          <span class="idx">02</span>
+          <span class="meta"><h3>Operators</h3><p>Arithmetic, assignment, comparison, logical, and increment/decrement.</p></span>
+          <span class="lvl">beginner</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="chapter" href="control-flow.html">
+          <span class="idx">03</span>
+          <span class="meta"><h3>If / Else &amp; Switch</h3><p>Branching logic, comparison chains, and the switch statement.</p></span>
+          <span class="lvl">beginner</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="chapter" href="loops.html">
+          <span class="idx">04</span>
+          <span class="meta"><h3>Loops</h3><p>for, while, do-while, nested loops, and break/continue.</p></span>
+          <span class="lvl">beginner</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="chapter" href="functions.html">
+          <span class="idx">05</span>
+          <span class="meta"><h3>Functions</h3><p>Declaring, calling, overloading, default args, and pass-by-reference.</p></span>
+          <span class="lvl">intermediate</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="chapter" href="arrays-strings.html">
+          <span class="idx">06</span>
+          <span class="meta"><h3>Arrays &amp; Strings</h3><p>Fixed arrays, 2D arrays, std::string, and std::vector basics.</p></span>
+          <span class="lvl">intermediate</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="chapter" href="pointers.html">
+          <span class="idx">07</span>
+          <span class="meta"><h3>Pointers &amp; References</h3><p>Addresses, dereferencing, pointer arithmetic, and why references are safer.</p></span>
+          <span class="lvl">intermediate</span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section aria-labelledby="progress-heading">
+      <h2 id="progress-heading">your progress <span class="tag">// stored in this browser</span></h2>
+      <p class="deck" data-progress-label>0 / 7 chapter quizzes complete</p>
+      <div class="progress-track"><div class="progress-fill" data-progress-fill style="width:0%"></div></div>
+      <p style="margin-top:14px;"><a class="btn btn-ghost" href="quiz.html">take a chapter quiz →</a></p>
+    </section>
+
+    <section aria-labelledby="preview-heading">
+      <h2 id="preview-heading">what the examples look like</h2>
+      <p class="deck">Every chapter shows code exactly like this — real, compilable, with its actual console output underneath.</p>
+
+      <div class="code-window">
+        <div class="cw-head">
+          <div class="dots cw-dots"><span></span><span></span><span></span></div>
+          <span class="fname">hello.cpp</span>
+          <button class="copy-btn">copy</button>
+        </div>
+        <pre><code><span class="tk-op">#include</span> <span class="tk-str">&lt;iostream&gt;</span>
+
+<span class="tk-type">int</span> <span class="tk-fn">main</span>() {
+    <span class="tk-com">// std::endl flushes the line and starts a new one</span>
+    std::cout &lt;&lt; <span class="tk-str">"Hello, C++!"</span> &lt;&lt; std::endl;
+    <span class="tk-kw">return</span> <span class="tk-num">0</span>;
+}</code></pre>
+        <div class="cw-output">
+          <div class="cw-label">output</div>
+          <pre><code>Hello, C++!</code></pre>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>cpp-guide/ — built by Layan Noriel D.</span>
+    <span><a href="leaderboard.php">quiz leaderboard (PHP)</a> · <a href="contact.html">contact</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>

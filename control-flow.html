@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>If / Else &amp; Switch — C++ Learning Guide</title>
+<meta name="description" content="C++ control flow: if, else if, else, the ternary operator, and switch statements.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="titlebar">
+  <div class="wrap">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <a class="brand" href="index.html"><span class="path">cpp-guide/</span><span class="file">control-flow.html</span></a>
+    <button class="navtoggle" aria-label="toggle menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">home</a>
+      <a href="data-types.html">data-types</a>
+      <a href="operators.html">operators</a>
+      <a href="control-flow.html">control-flow</a>
+      <a href="loops.html">loops</a>
+      <a href="functions.html">functions</a>
+      <a href="arrays-strings.html">arrays-strings</a>
+      <a href="pointers.html">pointers</a>
+      <a href="quiz.html">quiz</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <div class="eyebrow">chapter 03 / 07</div>
+    <h1>If / Else &amp; <span class="accent">Switch</span></h1>
+    <p class="lede">Control flow lets your program make decisions — running different code depending on whether a condition is true or false.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <section>
+      <h2>the if statement</h2>
+      <p class="deck">If the condition in parentheses is <code>true</code>, the block runs. Otherwise it's skipped.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">if-basic.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> temperature = <span class="tk-num">85</span>;
+
+<span class="tk-kw">if</span> (temperature &gt; <span class="tk-num">80</span>) {
+    std::cout &lt;&lt; <span class="tk-str">"It's hot outside."</span> &lt;&lt; std::endl;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>It's hot outside.</code></pre></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>if / else if / else</h2>
+      <p class="deck">Chain conditions to handle several cases. C++ checks them top to bottom and stops at the first true one.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">if-else-chain.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> score = <span class="tk-num">72</span>;
+
+<span class="tk-kw">if</span> (score &gt;= <span class="tk-num">90</span>) {
+    std::cout &lt;&lt; <span class="tk-str">"Grade: A"</span> &lt;&lt; std::endl;
+} <span class="tk-kw">else if</span> (score &gt;= <span class="tk-num">80</span>) {
+    std::cout &lt;&lt; <span class="tk-str">"Grade: B"</span> &lt;&lt; std::endl;
+} <span class="tk-kw">else if</span> (score &gt;= <span class="tk-num">70</span>) {
+    std::cout &lt;&lt; <span class="tk-str">"Grade: C"</span> &lt;&lt; std::endl;
+} <span class="tk-kw">else</span> {
+    std::cout &lt;&lt; <span class="tk-str">"Grade: F"</span> &lt;&lt; std::endl;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>Grade: C</code></pre></div>
+      </div>
+
+      <div class="note note-tip">
+        <div class="note-head">tip</div>
+        Order your conditions carefully. If the <code>score &gt;= 70</code> check were placed <em>before</em> <code>score &gt;= 90</code>, every A-grade score would incorrectly stop at "C" first.
+      </div>
+    </section>
+
+    <section>
+      <h2>the ternary operator</h2>
+      <p class="deck">A compact one-line if/else for simple cases: <code>condition ? valueIfTrue : valueIfFalse</code>.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">ternary.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> age = <span class="tk-num">16</span>;
+std::string status = (age &gt;= <span class="tk-num">18</span>) ? <span class="tk-str">"adult"</span> : <span class="tk-str">"minor"</span>;
+std::cout &lt;&lt; status &lt;&lt; std::endl;</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>minor</code></pre></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>the switch statement</h2>
+      <p class="deck">When you're comparing one variable against many exact values, <code>switch</code> is often clearer than a long <code>else if</code> chain.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">switch.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> day = <span class="tk-num">3</span>;
+
+<span class="tk-kw">switch</span> (day) {
+    <span class="tk-kw">case</span> <span class="tk-num">1</span>:
+        std::cout &lt;&lt; <span class="tk-str">"Monday"</span>; <span class="tk-kw">break</span>;
+    <span class="tk-kw">case</span> <span class="tk-num">2</span>:
+        std::cout &lt;&lt; <span class="tk-str">"Tuesday"</span>; <span class="tk-kw">break</span>;
+    <span class="tk-kw">case</span> <span class="tk-num">3</span>:
+        std::cout &lt;&lt; <span class="tk-str">"Wednesday"</span>; <span class="tk-kw">break</span>;
+    <span class="tk-kw">default</span>:
+        std::cout &lt;&lt; <span class="tk-str">"Unknown day"</span>;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>Wednesday</code></pre></div>
+      </div>
+
+      <div class="note note-pitfall">
+        <div class="note-head">common pitfall</div>
+        Forgetting <code>break;</code> causes "fall-through" — execution continues into the <em>next</em> case regardless of whether it matches. Sometimes intentional, usually a bug.
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="ex-head">try it yourself</div>
+      <p>Write a program that takes a <code>char</code> grade (<code>'A'</code> through <code>'F'</code>) and prints a matching message using <code>switch</code>, with a <code>default</code> case for anything else.</p>
+    </section>
+
+  </div>
+
+  <div class="wrap">
+    <div class="pager">
+      <a href="operators.html"><span class="dir">← back</span>Operators</a>
+      <a class="next" href="loops.html"><span class="dir">next →</span>Loops</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>cpp-guide/ — built by Layan Noriel D.</span>
+    <span><a href="leaderboard.php">leaderboard</a> · <a href="contact.html">contact</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>

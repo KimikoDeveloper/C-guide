@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Types — C++ Learning Guide</title>
+<meta name="description" content="C++ fundamental data types: int, double, float, char, bool, and string, plus sizes, ranges, and type conversion.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="titlebar">
+  <div class="wrap">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <a class="brand" href="index.html"><span class="path">cpp-guide/</span><span class="file">data-types.html</span></a>
+    <button class="navtoggle" aria-label="toggle menu">☰</button>
+    <nav class="navlinks">
+      <a href="index.html">home</a>
+      <a href="data-types.html">data-types</a>
+      <a href="operators.html">operators</a>
+      <a href="control-flow.html">control-flow</a>
+      <a href="loops.html">loops</a>
+      <a href="functions.html">functions</a>
+      <a href="arrays-strings.html">arrays-strings</a>
+      <a href="pointers.html">pointers</a>
+      <a href="quiz.html">quiz</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:48px 0 36px;">
+  <div class="wrap">
+    <div class="eyebrow">chapter 01 / 07</div>
+    <h1>Data <span class="accent">Types</span></h1>
+    <p class="lede">Every variable in C++ has a type, fixed at compile time. The type determines how much memory it takes and what you can do with it.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <section>
+      <h2>the fundamental types</h2>
+      <p class="deck">These seven cover the vast majority of everyday C++ code.</p>
+      <table>
+        <thead><tr><th>type</th><th>holds</th><th>typical size</th><th>example</th></tr></thead>
+        <tbody>
+          <tr><td><code>int</code></td><td>whole numbers</td><td>4 bytes</td><td><code>int age = 30;</code></td></tr>
+          <tr><td><code>double</code></td><td>decimal numbers (high precision)</td><td>8 bytes</td><td><code>double pi = 3.14159;</code></td></tr>
+          <tr><td><code>float</code></td><td>decimal numbers (lower precision)</td><td>4 bytes</td><td><code>float ratio = 1.5f;</code></td></tr>
+          <tr><td><code>char</code></td><td>a single character</td><td>1 byte</td><td><code>char grade = 'A';</code></td></tr>
+          <tr><td><code>bool</code></td><td>true or false</td><td>1 byte</td><td><code>bool isOn = true;</code></td></tr>
+          <tr><td><code>std::string</code></td><td>text (a sequence of chars)</td><td>varies</td><td><code>std::string name = "Ada";</code></td></tr>
+          <tr><td><code>auto</code></td><td>compiler infers the type</td><td>—</td><td><code>auto count = 5;</code></td></tr>
+        </tbody>
+      </table>
+      <p>Sizes are typical on common 64-bit platforms, not guaranteed by the language — use <code>sizeof(type)</code> if you need the exact size on your system.</p>
+    </section>
+
+    <section>
+      <h2>declaring &amp; initializing variables</h2>
+      <p class="deck">Declare a variable by writing its type, then its name. Give it a starting value with <code>=</code>.</p>
+
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">variables.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-op">#include</span> <span class="tk-str">&lt;iostream&gt;</span>
+<span class="tk-op">#include</span> <span class="tk-str">&lt;string&gt;</span>
+
+<span class="tk-type">int</span> <span class="tk-fn">main</span>() {
+    <span class="tk-type">int</span> age = <span class="tk-num">30</span>;
+    <span class="tk-type">double</span> price = <span class="tk-num">19.99</span>;
+    <span class="tk-type">char</span> initial = <span class="tk-str">'A'</span>;
+    <span class="tk-type">bool</span> inStock = <span class="tk-kw">true</span>;
+    std::string name = <span class="tk-str">"Widget"</span>;
+
+    std::cout &lt;&lt; name &lt;&lt; <span class="tk-str">" ($"</span> &lt;&lt; price &lt;&lt; <span class="tk-str">") — age code: "</span>
+              &lt;&lt; initial &lt;&lt; <span class="tk-str">", in stock: "</span> &lt;&lt; inStock &lt;&lt; std::endl;
+    <span class="tk-kw">return</span> <span class="tk-num">0</span>;
+}</code></pre>
+        <div class="cw-output"><div class="cw-label">output</div><pre><code>Widget ($19.99) — age code: A, in stock: 1</code></pre></div>
+      </div>
+
+      <div class="note note-tip">
+        <div class="note-head">tip</div>
+        <code>bool</code> values print as <code>1</code> (true) or <code>0</code> (false) by default. Use <code>std::boolalpha</code> before printing if you want the words "true"/"false" instead.
+      </div>
+    </section>
+
+    <section>
+      <h2>constants</h2>
+      <p class="deck">Use <code>const</code> when a value should never change after it's set — the compiler will enforce it for you.</p>
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">constants.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-kw">const</span> <span class="tk-type">double</span> PI = <span class="tk-num">3.14159</span>;
+<span class="tk-kw">const</span> <span class="tk-type">int</span> MAX_USERS = <span class="tk-num">100</span>;
+
+<span class="tk-com">// PI = 3.14; // compile error — cannot assign to a const variable</span></code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>type conversion</h2>
+      <p class="deck">C++ converts between types automatically in some cases (<em>implicit</em>) and lets you force it in others (<em>explicit</em>, or "casting").</p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h4>implicit conversion</h4>
+          <p>Happens automatically, e.g. mixing <code>int</code> and <code>double</code> in one expression. C++ widens the <code>int</code> to a <code>double</code> before doing the math.</p>
+        </div>
+        <div class="card">
+          <h4>explicit conversion (casting)</h4>
+          <p>You request it directly with <code>static_cast&lt;type&gt;(value)</code> — the modern, safer alternative to old C-style casts like <code>(int)value</code>.</p>
+        </div>
+      </div>
+
+      <div class="code-window">
+        <div class="cw-head"><div class="dots cw-dots"><span></span><span></span><span></span></div><span class="fname">conversion.cpp</span><button class="copy-btn">copy</button></div>
+        <pre><code><span class="tk-type">int</span> total = <span class="tk-num">7</span>;
+<span class="tk-type">int</span> count = <span class="tk-num">2</span>;
+
+<span class="tk-com">// integer division truncates: 7 / 2 == 3, not 3.5</span>
+<span class="tk-type">double</span> wrong = total / count;              <span class="tk-com">// 3.0</span>
+
+<span class="tk-com">// cast one operand to double first to get real division</span>
+<span class="tk-type">double</span> correct = <span class="tk-kw">static_cast</span>&lt;<span class="tk-type">double</span>&gt;(total) / count; <span class="tk-com">// 3.5</span></code></pre>
+      </div>
+
+      <div class="note note-pitfall">
+        <div class="note-head">common pitfall</div>
+        Dividing two <code>int</code>s always produces an <code>int</code> — the fractional part is discarded, not rounded. This is one of the most common sources of subtle bugs for C++ beginners.
+      </div>
+    </section>
+
+    <section class="exercise">
+      <div class="ex-head">try it yourself</div>
+      <p>Declare an <code>int</code> called <code>seconds</code> set to <code>150</code>. Convert it to minutes and remaining seconds using integer division (<code>/</code>) and the modulo operator (<code>%</code>), then print <code>"2 min 30 sec"</code>. You'll meet <code>%</code> properly in the next chapter — give it a guess first.</p>
+    </section>
+
+  </div>
+
+  <div class="wrap">
+    <div class="pager">
+      <a href="index.html"><span class="dir">← back</span>course overview</a>
+      <a class="next" href="operators.html"><span class="dir">next →</span>Operators</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>cpp-guide/ — built by Layan Noriel D.</span>
+    <span><a href="leaderboard.php">leaderboard</a> · <a href="contact.html">contact</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>
